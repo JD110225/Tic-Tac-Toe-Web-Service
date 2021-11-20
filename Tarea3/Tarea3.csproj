@@ -122,12 +122,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Connected Services\localRef\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
-    <Compile Include="Connected Services\miServicio\Reference.cs">
+    <Compile Include="Connected Services\ServiceReference2\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -144,23 +139,16 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Connected Services\localRef\ECCI_HolaMundo.wsdl" />
-    <None Include="Connected Services\miServicio\ECCI_HolaMundo.wsdl" />
+    <None Include="Connected Services\ServiceReference2\TikTakToe.wsdl" />
     <None Include="Connected Services\servicioBraulio\configuration91.svcinfo" />
     <None Include="Connected Services\servicioBraulio\configuration.svcinfo" />
     <None Include="Connected Services\servicioBraulio\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-    <None Include="Connected Services\miServicio\configuration91.svcinfo" />
-    <None Include="Connected Services\miServicio\configuration.svcinfo" />
-    <None Include="Connected Services\miServicio\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-    <None Include="Connected Services\localRef\configuration91.svcinfo" />
-    <None Include="Connected Services\localRef\configuration.svcinfo" />
-    <None Include="Connected Services\localRef\Reference.svcmap">
+    <None Include="Connected Services\ServiceReference2\configuration91.svcinfo" />
+    <None Include="Connected Services\ServiceReference2\configuration.svcinfo" />
+    <None Include="Connected Services\ServiceReference2\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
@@ -204,6 +192,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
+    <Folder Include="Server\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -222,8 +211,7 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadataStorage Include="Connected Services\localRef\" />
-    <WCFMetadataStorage Include="Connected Services\miServicio\" />
+    <WCFMetadataStorage Include="Connected Services\ServiceReference2\" />
     <WCFMetadataStorage Include="Connected Services\servicioBraulio\" />
   </ItemGroup>
   <PropertyGroup>

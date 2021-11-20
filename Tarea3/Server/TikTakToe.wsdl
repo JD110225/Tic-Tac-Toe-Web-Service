@@ -1,0 +1,96 @@
+<?xml version="1.0"?>
+
+<definitions name="TikTakToe"
+             targetNamespace="urn:TikTakToe"
+             xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+             xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+             xmlns:tns="urn:TikTakToe"
+             xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+             xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/"
+             xmlns="http://schemas.xmlsoap.org/wsdl/">
+			 
+  
+	<types>
+		<xsd:schema targetNamespace="urn:TikTakToe"/>
+	</types>
+  
+
+	<message name="sendTableroClientIN">
+	</message>
+
+	<message name="sendTableroClientOUT">
+		<part name="return" type="xsd:string"/>
+	</message>
+	
+	<message name="placeTokenIN">
+		<part name="token" type="xsd:string"/>
+		<part name="row" type="xsd:int"/>
+		<part name="col" type="xsd:int"/>
+
+	</message>
+
+	<message name="placeTokenOUT">
+		<part name="return" type="xsd:string"/>
+	</message>
+
+
+
+	<portType name="TikTakToePort">
+		<operation name="sendTableroClient">
+			<documentation>TikTakToe::sendTableroClient() sendTableroClient</documentation>
+			<input message="tns:sendTableroClientIN"/>
+			<output message="tns:sendTableroClientOUT"/>		
+		</operation>
+		<operation name="placeToken">
+			<documentation>TikTakToe::placeToken() placeToken</documentation>
+			<input message="tns:placeTokenIN"/>
+			<output message="tns:placeTokenOUT"/>		
+		</operation>
+	</portType>
+
+
+	<!-- Vinculación de los llamados con el transporte - RPC, SOAP/Encoded over HTTP -->
+
+	<binding name="TikTakToeBinding" type="tns:TikTakToePort">
+		<soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+		
+		
+		<operation name="sendTableroClient">
+			<soap:operation soapAction="urn:TikTakToe#TikTakToe#sendTableroClient"/>
+			<input>
+				<soap:body use="encoded"
+				           encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+						   namespace="urn:TikTakToe"/>
+			</input>
+			<output>
+				<soap:body use="encoded"
+				           encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+						   namespace="urn:TikTakToe"/>
+			</output>
+		</operation>
+
+		<operation name="placeToken">
+			<soap:operation soapAction="urn:TikTakToe#TikTakToe#placeToken"/>
+			<input>
+				<soap:body use="encoded"
+				           encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+						   namespace="urn:TikTakToe"/>
+			</input>
+			<output>
+				<soap:body use="encoded"
+				           encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+						   namespace="urn:TikTakToe"/>
+			</output>
+		</operation>
+
+		
+	</binding>
+
+	<!-- Punto de comunicación con la clase HolaMundo -->
+
+	<service name="TikTakToeService">
+		<port name="TikTakToePort" binding="tns:TikTakToeBinding">
+			<soap:address location="http://titanic.ecci.ucr.ac.cr/~eb92570/Tarea3/"/>
+		</port>
+	</service>
+</definitions>

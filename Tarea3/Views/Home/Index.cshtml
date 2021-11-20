@@ -46,6 +46,7 @@
     const changeCell = (id) => {
         if ($('#' + id).html() == '') {
             $('#' + id).html(currentToken);
+            sendTokenToServer(currentToken,id);
             if (currentToken == 'X') {
                 currentToken = 'O'
             }
@@ -53,5 +54,20 @@
                 currentToken = 'X'
             }
         }
+    }
+
+    const sendTokenToServer=(token,id)=>{
+            jQuery.ajax({
+                url: '/Home/hello',
+                contentType: "application/json; charset=utf-8",
+                type: 'GET',
+                data: {
+                    token,
+                    id
+                },
+                success: function (data) {
+                   
+                }
+        })
     }
 </script>

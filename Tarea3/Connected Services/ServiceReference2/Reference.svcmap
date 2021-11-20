@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="9bc64f74-3f0a-4a7f-a056-75c127894d03" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="7450890c-c440-4c3d-bd84-bbc9c587859c" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
     <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
@@ -19,10 +19,10 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://localhost:8080?wsdl" Protocol="http" SourceId="1" />
+    <MetadataSource Address="http://titanic.ecci.ucr.ac.cr/~eb92570/Tarea3/?wsdl" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="ECCI_HolaMundo.wsdl" MetadataType="Wsdl" ID="d7f77188-61c3-40d8-bb10-1b140e9b4515" SourceId="1" SourceUrl="http://localhost:8080/?wsdl" />
+    <MetadataFile FileName="TikTakToe.wsdl" MetadataType="Wsdl" ID="2b8f2799-17c7-4799-ad33-234c4ba3e6f7" SourceId="1" SourceUrl="http://titanic.ecci.ucr.ac.cr/~eb92570/Tarea3/?wsdl" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
