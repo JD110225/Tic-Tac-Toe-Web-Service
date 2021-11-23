@@ -1,5 +1,5 @@
-﻿<style> 
-.game-board {
+﻿<style>
+    .game-board {
         width: 600px;
         height: 600px;
         margin: 0 auto;
@@ -22,12 +22,36 @@
         align-items: center;
     }
 </style>
-<div style="margin-bottom:80px" class="jumbotron">
-    <h1>Tic Tac Toe</h1>
+<div class="container-fluid bg-light p-5" style="margin-bottom:30px;">
+    <h1 class="display-4">Tik Tak Toe</h1>
+    <p class="lead">This is  a jumbotron created using the bootstrap 5</p>
+    @*<hr class="my-4">
+        <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+        <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>*@
 </div>
-
-<div class="row">
-    <h1>@ViewBag.saludo</h1>
+<div class="modal"  data-bs-backdrop="static" tabindex="-1" id='myModal'>
+    <div class="modal-dialog  modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Bienvenido a Tik Tak Toe</h5>
+                <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Nombre de usuario</label>
+                        <input type="text" class="form-control" id="exampleFormControlInput1" name="nombreUsuario" placeholder="Escribe aquí tu nombre de usuario">
+                    </div>
+            </div>
+            <div class="modal-footer">
+                <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
+                <button type="submit" data-bs-dismiss="modal" class="btn btn-primary">Continuar</button>
+            </div>
+                </form>
+        </div>
+    </div>
+</div>
+<div class="row"> 
     <div class="game-board">
         <div id="00" class="box" onclick="changeCell('00')"></div>
         <div id="01" class="box" onclick="changeCell('01')"></div>
@@ -42,11 +66,20 @@
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
+    $(function () {
+        if ('@ViewBag.needsAuth' == 'True') {
+            console.log('@ViewBag.needsAuth')
+            $('#myModal').modal('show');
+        }
+        else {
+            console.log('@ViewBag.needsAuth');
+        }
+    })
     let currentToken = 'X';
     const changeCell = (id) => {
         if ($('#' + id).html() == '') {
             $('#' + id).html(currentToken);
-            sendTokenToServer(currentToken,id);
+            sendTokenToServer(currentToken, id);
             if (currentToken == 'X') {
                 currentToken = 'O'
             }
@@ -56,18 +89,18 @@
         }
     }
 
-    const sendTokenToServer=(token,id)=>{
-            jQuery.ajax({
-                url: '/Home/hello',
-                contentType: "application/json; charset=utf-8",
-                type: 'GET',
-                data: {
-                    token,
-                    id
-                },
-                success: function (data) {
-                   
-                }
+    const sendTokenToServer = (token, id) => {
+        jQuery.ajax({
+            url: '/Home/placeToken',
+            contentType: "application/json; charset=utf-8",
+            type: 'GET',
+            data: {
+                token,
+                id
+            },
+            success: function (data) {
+
+            }
         })
     }
 </script>

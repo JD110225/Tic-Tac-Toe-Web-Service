@@ -6,7 +6,7 @@ class JuegoTikTakToe{
     $this->tablero=array(
       array('X','X','X'),
       array('O','O','O'),
-      array('X','X','X')
+      array('X','X','X') 
     );
     $this->placeToken('H',1,1);
   }
