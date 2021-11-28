@@ -3,24 +3,13 @@
   <wsdl:types>
     <xsd:schema targetNamespace="urn:TikTakToe" />
   </wsdl:types>
-  <wsdl:message name="sendTableroClientIN" />
-  <wsdl:message name="sendTableroClientOUT">
-    <wsdl:part name="return" type="xsd:string" />
-  </wsdl:message>
   <wsdl:message name="placeTokenIN">
     <wsdl:part name="token" type="xsd:string" />
-    <wsdl:part name="row" type="xsd:int" />
-    <wsdl:part name="col" type="xsd:int" />
   </wsdl:message>
   <wsdl:message name="placeTokenOUT">
     <wsdl:part name="return" type="xsd:string" />
   </wsdl:message>
   <wsdl:portType name="TikTakToePort">
-    <wsdl:operation name="sendTableroClient">
-      <documentation>TikTakToe::sendTableroClient() sendTableroClient</documentation>
-      <wsdl:input message="tns:sendTableroClientIN" />
-      <wsdl:output message="tns:sendTableroClientOUT" />
-    </wsdl:operation>
     <wsdl:operation name="placeToken">
       <documentation>TikTakToe::placeToken() placeToken</documentation>
       <wsdl:input message="tns:placeTokenIN" />
@@ -29,15 +18,6 @@
   </wsdl:portType>
   <wsdl:binding name="TikTakToeBinding" type="tns:TikTakToePort">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc" />
-    <wsdl:operation name="sendTableroClient">
-      <soap:operation soapAction="urn:TikTakToe#TikTakToe#sendTableroClient" />
-      <wsdl:input>
-        <soap:body use="encoded" namespace="urn:TikTakToe" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="encoded" namespace="urn:TikTakToe" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
-      </wsdl:output>
-    </wsdl:operation>
     <wsdl:operation name="placeToken">
       <soap:operation soapAction="urn:TikTakToe#TikTakToe#placeToken" />
       <wsdl:input>

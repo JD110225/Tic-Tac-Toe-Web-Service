@@ -25,16 +25,12 @@
 <div class="container-fluid bg-light p-5" style="margin-bottom:30px;">
     <h1 class="display-4">Tik Tak Toe</h1>
     <p class="lead">This is  a jumbotron created using the bootstrap 5</p>
-    @*<hr class="my-4">
-        <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
-        <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>*@
 </div>
 <div class="modal"  data-bs-backdrop="static" tabindex="-1" id='myModal'>
     <div class="modal-dialog  modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">Bienvenido a Tik Tak Toe</h5>
-                <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
             </div>
             <div class="modal-body">
                 <form>
@@ -44,7 +40,6 @@
                     </div>
             </div>
             <div class="modal-footer">
-                <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
                 <button type="submit" data-bs-dismiss="modal" class="btn btn-primary">Continuar</button>
             </div>
                 </form>
@@ -66,7 +61,13 @@
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
+    let matriz = new Array(new Array(), new Array(), new Array());
     $(function () {
+        for (let i = 0; i < 3; ++i) {
+            for (let j = 0; j < 3; ++j) {
+                matriz[i][j]='-'
+            }
+        }
         if ('@ViewBag.needsAuth' == 'True') {
             console.log('@ViewBag.needsAuth')
             $('#myModal').modal('show');
@@ -79,27 +80,36 @@
     const changeCell = (id) => {
         if ($('#' + id).html() == '') {
             $('#' + id).html(currentToken);
-            sendTokenToServer(currentToken, id);
-            if (currentToken == 'X') {
-                currentToken = 'O'
-            }
-            else {
-                currentToken = 'X'
-            }
+            sendMatrizToServer(currentToken, id);
         }
     }
 
-    const sendTokenToServer = (token, id) => {
+    const sendMatrizToServer = (token, id) => {
+        let row = id[0];
+        let col = id[1];
+        matriz[row][col] = token;
+        let matrizString = "";
+        for (let i = 0; i < 3; ++i) {
+            for (let j = 0; j < 3; ++j) {
+                matrizString += matriz[i][j];
+            }
+        }
+        console.log(matrizString);
         jQuery.ajax({
             url: '/Home/placeToken',
             contentType: "application/json; charset=utf-8",
             type: 'GET',
             data: {
-                token,
-                id
+                matrizString
+                //token,
+                //id
             },
             success: function (data) {
-
+                let row = data[0];
+                let col = data[1];
+                matriz[row][col] = 'O';
+                console.log("Printing in success function !")
+                $("#" + row + col).html('O')
             }
         })
     }
