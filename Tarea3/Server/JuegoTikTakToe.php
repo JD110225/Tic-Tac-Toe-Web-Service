@@ -108,7 +108,7 @@ class JuegoTikTakToe{
   }
   function placeToken($tablero)
   {
-    //$tablero=$this->stringToMatriz($tablero);    
+    $tablero=$this->stringToMatriz($tablero);    
     $ganador = $this->checkWinningConditions($tablero);
     if($ganador=="nadie") {
         $coordenadasJugadaCompu=$this->jugadaCompu($tablero);

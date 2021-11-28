@@ -61,6 +61,7 @@
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
+    let hayGanador = false;
     let matriz = new Array(new Array(), new Array(), new Array());
     $(function () {
         for (let i = 0; i < 3; ++i) {
@@ -79,7 +80,9 @@
     let currentToken = 'X';
     const changeCell = (id) => {
         if ($('#' + id).html() == '') {
-            $('#' + id).html(currentToken);
+            if (!hayGanador) {
+                $('#' + id).html(currentToken);
+            }
             sendMatrizToServer(currentToken, id);
         }
     }
@@ -101,15 +104,21 @@
             type: 'GET',
             data: {
                 matrizString
-                //token,
-                //id
             },
             success: function (data) {
-                let row = data[0];
-                let col = data[1];
-                matriz[row][col] = 'O';
-                console.log("Printing in success function !")
-                $("#" + row + col).html('O')
+                if (data.length == 1) {
+                    console.log("Ganador: " + data[0]);
+                    hayGanador = true;
+                    alert("Felicidades "+data[0]+" has ganado")
+                }
+                else {
+                    let row = data[0];
+                    let col = data[1];
+                    matriz[row][col] = 'O';
+                    console.log("Printing in success function !")
+                    $("#" + row + col).html('O')
+                }
+
             }
         })
     }

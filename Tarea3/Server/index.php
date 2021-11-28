@@ -3,16 +3,16 @@
 require_once 'JuegoTikTakToe.php';
  
 
- $game=new JuegoTikTakToe();
+//  $game=new JuegoTikTakToe();
 
- $tableroPrueba=array(
- 	array('X','X',''),
- 	array('-','-','-'),
- 	array('-','-','-'));
+//  $tableroPrueba=array(
+//  	array('X','X',''),
+//  	array('-','-','-'),
+//  	array('-','-','-'));
 
- $game->tableroToString($tableroPrueba);
+//  $game->tableroToString($tableroPrueba);
 
- echo $game->placeToken($tableroPrueba);
+//  echo $game->placeToken($tableroPrueba);
 
 if (isset($_GET['wsdl'])) {
 	header('Content-Type: application/soap+xml; charset=utf-8');
