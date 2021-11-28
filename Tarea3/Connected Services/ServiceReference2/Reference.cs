@@ -15,23 +15,14 @@ namespace Tarea3.ServiceReference2 {
     [System.ServiceModel.ServiceContractAttribute(Namespace="urn:TikTakToe", ConfigurationName="ServiceReference2.TikTakToePort")]
     public interface TikTakToePort {
         
-        [System.ServiceModel.OperationContractAttribute(Action="urn:TikTakToe#TikTakToe#sendTableroClient", ReplyAction="*")]
-        [System.ServiceModel.XmlSerializerFormatAttribute(Style=System.ServiceModel.OperationFormatStyle.Rpc, SupportFaults=true, Use=System.ServiceModel.OperationFormatUse.Encoded)]
-        [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
-        string sendTableroClient();
-        
-        [System.ServiceModel.OperationContractAttribute(Action="urn:TikTakToe#TikTakToe#sendTableroClient", ReplyAction="*")]
-        [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
-        System.Threading.Tasks.Task<string> sendTableroClientAsync();
-        
         [System.ServiceModel.OperationContractAttribute(Action="urn:TikTakToe#TikTakToe#placeToken", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(Style=System.ServiceModel.OperationFormatStyle.Rpc, SupportFaults=true, Use=System.ServiceModel.OperationFormatUse.Encoded)]
         [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
-        string placeToken(string token, int row, int col);
+        string placeToken(string token);
         
         [System.ServiceModel.OperationContractAttribute(Action="urn:TikTakToe#TikTakToe#placeToken", ReplyAction="*")]
         [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
-        System.Threading.Tasks.Task<string> placeTokenAsync(string token, int row, int col);
+        System.Threading.Tasks.Task<string> placeTokenAsync(string token);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -61,20 +52,12 @@ namespace Tarea3.ServiceReference2 {
                 base(binding, remoteAddress) {
         }
         
-        public string sendTableroClient() {
-            return base.Channel.sendTableroClient();
+        public string placeToken(string token) {
+            return base.Channel.placeToken(token);
         }
         
-        public System.Threading.Tasks.Task<string> sendTableroClientAsync() {
-            return base.Channel.sendTableroClientAsync();
-        }
-        
-        public string placeToken(string token, int row, int col) {
-            return base.Channel.placeToken(token, row, col);
-        }
-        
-        public System.Threading.Tasks.Task<string> placeTokenAsync(string token, int row, int col) {
-            return base.Channel.placeTokenAsync(token, row, col);
+        public System.Threading.Tasks.Task<string> placeTokenAsync(string token) {
+            return base.Channel.placeTokenAsync(token);
         }
     }
 }

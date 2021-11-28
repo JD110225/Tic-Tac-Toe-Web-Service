@@ -39,15 +39,17 @@
 require_once 'JuegoTikTakToe.php';
  
 
-$game=new JuegoTikTakToe();
-$game->placeToken('K',1,1);
-$tablero=($game->getTablero());
-foreach($tablero as $fila){
-	foreach($fila as $celda){
-		echo $celda . "";
-	}
-	echo "<br><br>";
-}
+// $game=new JuegoTikTakToe();
+
+// $tableroPrueba=array(
+// 	array('X','X','X'),
+// 	array('X','X','X'),
+// 	array('-','-','X'));
+
+// $game->tableroToString($tableroPrueba);
+
+// echo $game->jugadaCompu($tableroPrueba);
+
 if (isset($_GET['wsdl'])) {
 	header('Content-Type: application/soap+xml; charset=utf-8');
 	echo file_get_contents('TikTakToe.wsdl');
