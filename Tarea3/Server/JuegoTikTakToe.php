@@ -78,7 +78,7 @@ class JuegoTikTakToe{
   function jugadaCompu($tablero){
     $jugadaInteligente=$this->jugadaCompuInteligente($tablero);
     if($jugadaInteligente==""){
-      echo "toca tonta";
+    $this->tableroToString($tablero);
       $posiblesCeldas=$this->getEspaciosVacios($tablero);
       $key=array_rand($posiblesCeldas);
       $xCoordinate= $posiblesCeldas[$key][0];
@@ -108,8 +108,14 @@ class JuegoTikTakToe{
   }
   function placeToken($tablero)
   {
-    $tablero=$this->stringToMatriz($tablero);
-    $coordenadasJugadaCompu=$this->jugadaCompu($tablero);
+    //$tablero=$this->stringToMatriz($tablero);    
+    $ganador = $this->checkWinningConditions($tablero);
+    if($ganador=="nadie") {
+        $coordenadasJugadaCompu=$this->jugadaCompu($tablero);
+    }
+    else {
+        $coordenadasJugadaCompu=$ganador;
+    }
     return $coordenadasJugadaCompu;
   }
 
@@ -117,50 +123,51 @@ function getTablero(){
     return $this->tablero;
   }
   
-function getFila($fila) {
-  return($this->tablero[$fila][0]+$this->tablero[$fila][1]+$this->tablero[$fila][2]);
+function getFila($tablero,$fila) {
+  return($tablero[$fila][0].$tablero[$fila][1].$tablero[$fila][2]);
 }
 
-function getColumna($columna) {
-  return($this->tablero[0][$columna]+$this->tablero[1][$columna]+$this->tablero[2][$columna]);
+function getColumna($tablero,$columna) {
+  return($tablero[0][$columna].$tablero[1][$columna].$tablero[2][$columna]);
 }
 
-function getDiagonal1() {
-  return($this->tablero[0][0]+$this->tablero[1][1]+$this->tablero[2][2]+);
+function getDiagonal1($tablero) {
+  return($tablero[0][0].$tablero[1][1].$tablero[2][2]);
 }
 
-function getDiagonal2() {
-  return($this->tablero[2][2]+$this->tablero[1][1]+$this->tablero[0][0]+);
+function getDiagonal2($tablero) {
+  return($tablero[2][2].$tablero[1][1].$tablero[0][0]);
 }
 
-function checkWinningConditions() {
-  $winner = "";
+function checkWinningConditions($tablero) {
+  $winner = "nadie";
   $contador = 0;
-  while($contador<3 && $winner=="") {
-    if(getFila($contador)=="XXX") {
+  while($contador<3 && $winner=="nadie") {
+    if($this->getFila($tablero,$contador)=="XXX") {
       $winner = "X";
     }
-    else if(getFila($contador)=="OOO") {
+    else if($this->getFila($tablero,$contador)=="OOO") {
       $winner = "O";
     }
-    else if(getColumna($contador)=="XXX") {
+    else if($this->getColumna($tablero,$contador)=="XXX") {
       $winner = "X";
     }
-    else if(getColumna($contador)=="OOO") {
+    else if($this->getColumna($tablero,$contador)=="OOO") {
       $winner = "O";
     }
+    $contador += 1;
   }
-  if($winner=="") {
-    if(getDiagonal1()=="XXX") {
+  if($winner=="nadie") {
+    if($this->getDiagonal1($tablero)=="XXX") {
       $winner="X";
     }
-    if(getDiagonal1()=="OOO") {
+    if($this->getDiagonal1($tablero)=="OOO") {
       $winner="O";
     }
-    if(getDiagonal2()=="XXX") {
+    if($this->getDiagonal2($tablero)=="XXX") {
       $winner="X";
     }
-    if(getDiagonal2()=="OOO") {
+    if($this->getDiagonal2($tablero)=="OOO") {
       $winner="O";
     }
   }
