@@ -14,12 +14,15 @@ namespace Tarea3.Controllers
         {
 
         }
+        [HttpGet]
         public ActionResult Index()
         {
             if (Request["nombreUsuario"] != null)
             {
+                //ViewBag.tiempoInicial= DateTime.Now;
                 string userName = Request["nombreUsuario"];
                 ViewBag.needsAuth =false;
+                Debug.WriteLine(userName);
                 FormsAuthentication.SetAuthCookie(userName, false);
                 return View();
             }
@@ -30,14 +33,24 @@ namespace Tarea3.Controllers
             }
 
         }
+        [HttpPost]
+        public ActionResult Index(string resultado)
+        {
+            Debug.WriteLine(resultado);
+            if (resultado != "")
+            {
+                string cookieName = FormsAuthentication.FormsCookieName; //Find cookie name
+                HttpCookie authCookie = HttpContext.Request.Cookies[cookieName]; //Get the cookie by it's name
+                FormsAuthenticationTicket ticket = FormsAuthentication.Decrypt(authCookie.Value); //Decrypt it
+                string ganador = ticket.Name; //You have the UserName!
+                SqlHandler handler = new SqlHandler();
+                handler.InsertarEnBaseDeDatos(ganador,resultado);
+            }
+            return RedirectToAction("Index","Home");
+        }
         public string placeToken(string matrizString)
         {
             Debug.WriteLine("Matriz frente: " + matrizString);
-            string cookieName = FormsAuthentication.FormsCookieName; //Find cookie name
-            HttpCookie authCookie = HttpContext.Request.Cookies[cookieName]; //Get the cookie by it's name
-            FormsAuthenticationTicket ticket = FormsAuthentication.Decrypt(authCookie.Value); //Decrypt it
-            string UserName = ticket.Name; //You have the UserName!
-            Debug.WriteLine("Decripted username: " + UserName);
             try
             {
                 ServiceReference2.TikTakToePortClient client = Session["test"] as ServiceReference2.TikTakToePortClient;
@@ -53,6 +66,14 @@ namespace Tarea3.Controllers
                 return tab;
 
             }
+        }
+
+        public ActionResult getPuntajes()
+        {
+            SqlHandler handler = new SqlHandler();
+            ViewBag.puntajes=handler.LeerBaseDeDatos();
+            Debug.WriteLine(handler.LeerBaseDeDatos());
+            return View();
         }
 
     }

@@ -59,18 +59,27 @@
         <div id="22" class="box" onclick="changeCell('22')"></div>
     </div>
 </div>
+
+<form id="formulario" method="post">
+    <input name="resultado" id="resultado" type="hidden" />
+    @*<input name="ganador" id="ganador" type="hidden" />*@
+    <button type="submit" style="display:none;">Continuar</button>
+</form>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
     let hayGanador = false;
     let matriz = new Array(new Array(), new Array(), new Array());
+    var startTime;
     $(function () {
+        startTime = performance.now()
+        console.log("Inicio: "+startTime)
         for (let i = 0; i < 3; ++i) {
             for (let j = 0; j < 3; ++j) {
                 matriz[i][j]='-'
             }
         }
         if ('@ViewBag.needsAuth' == 'True') {
-            console.log('@ViewBag.needsAuth')
             $('#myModal').modal('show');
         }
         else {
@@ -86,7 +95,6 @@
             sendMatrizToServer(currentToken, id);
         }
     }
-
     const sendMatrizToServer = (token, id) => {
         let row = id[0];
         let col = id[1];
@@ -106,10 +114,17 @@
                 matrizString
             },
             success: function (data) {
-                if (data.length == 1) {
+                if (data.length == 1) { 
                     console.log("Ganador: " + data[0]);
                     hayGanador = true;
-                    alert("Felicidades "+data[0]+" has ganado")
+                    var endTime = performance.now()
+                    if (data[0] == 'X') {
+                        document.getElementById("resultado").value = (endTime - startTime) / 1000;
+                    }
+                   
+                    alert("Felicidades " + data[0] + " has ganado")
+                    document.getElementById("formulario").submit();
+
                 }
                 else {
                     let row = data[0];

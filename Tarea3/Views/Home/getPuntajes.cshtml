@@ -1,0 +1,21 @@
+﻿
+<h2 style="text-align:center;margin:4%;">
+    Mejores puntuaciones
+</h2>
+<table class="table table-striped">
+    <tr>
+        <th>
+            Nombre
+        </th>
+        <th>
+            Tiempo
+        </th>
+    </tr>
+    @foreach (var puntaje in ViewBag.puntajes)
+    {
+        <tr>
+            <td>@puntaje.nombre</td>
+            <td>@puntaje.tiempo</td>
+        </tr>
+    }
+</table>
