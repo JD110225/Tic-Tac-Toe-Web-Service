@@ -10,7 +10,7 @@ namespace Tarea3
     public struct Puntaje
     {
         public string nombre;
-        public int tiempo;
+        public decimal tiempo;
 
     }
     public class SqlHandler
@@ -26,7 +26,7 @@ namespace Tarea3
 
         public List<Puntaje> LeerBaseDeDatos()
         {
-            string consulta = "SELECT * FROM Puntajes ORDER BY tiempo desc";
+            string consulta = "SELECT * FROM Puntajes ORDER BY tiempo asc LIMIT 10;";
             SqlCommand comandoConsulta = new SqlCommand(consulta, conexion);
             SqlDataAdapter adaptador = new SqlDataAdapter(comandoConsulta);
             DataTable consultaFormatoTabla = new DataTable();
@@ -44,7 +44,7 @@ namespace Tarea3
                 lista.Add(new Puntaje
                 {
                     nombre = Convert.ToString(row["nombre"]),
-                    tiempo = Convert.ToInt32(row["tiempo"])
+                    tiempo = Convert.ToDecimal(row["tiempo"])
                 }) ;
             }
             return lista;

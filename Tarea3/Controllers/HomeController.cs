@@ -5,7 +5,6 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
-using Tarea3.Models;
 namespace Tarea3.Controllers
 {
     public class HomeController : Controller
