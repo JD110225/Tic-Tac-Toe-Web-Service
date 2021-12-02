@@ -52,19 +52,20 @@ namespace Tarea3
 
         public bool InsertarEnBaseDeDatos(string nombre, string tiempo)
         {
-            string consulta = "INSERT INTO Puntajes (nombre,tiempo) VALUES(@Nombre,@Tiempo)";
+            string consulta = "INSERT INTO Puntajes (nombre,tiempo) VALUES('"+nombre+"','"+tiempo+"');";
+            Debug.WriteLine(consulta);
             SqlCommand comandoConsulta = new SqlCommand(consulta, conexion);
-            comandoConsulta.Parameters.AddWithValue("@Nombre", nombre);
-            comandoConsulta.Parameters.AddWithValue("@Tiempo", tiempo);
             conexion.Open();
             bool exito;
             try
             {
                 comandoConsulta.ExecuteNonQuery();
                 exito = true;
+                Debug.WriteLine("Exito al insertar en base de datos");
             }
             catch (System.Exception ex)
             {
+                Debug.WriteLine("Error al insertar en base de datos");
                 System.Console.WriteLine(ex.Message);
                 exito = false;
             }

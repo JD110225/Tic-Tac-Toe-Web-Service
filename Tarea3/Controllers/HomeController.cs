@@ -45,6 +45,7 @@ namespace Tarea3.Controllers
                 string ganador = ticket.Name; //You have the UserName!
                 SqlHandler handler = new SqlHandler();
                 handler.InsertarEnBaseDeDatos(ganador,resultado);
+                Debug.WriteLine("llegue aqui");
             }
             return RedirectToAction("Index","Home");
         }
