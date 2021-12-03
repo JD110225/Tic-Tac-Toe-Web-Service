@@ -24,7 +24,7 @@
 </style>
 <div class="container-fluid bg-light p-5" style="margin-bottom:30px;">
     <h1 class="display-4">Tik Tak Toe</h1>
-    <p class="lead">This is  a jumbotron created using the bootstrap 5</p>
+    <p class="lead">Eduardo Fernández B92911 y José David Delgado B92570</p>
 </div>
 <div class="modal"  data-bs-backdrop="static" tabindex="-1" id='myModal'>
     <div class="modal-dialog  modal-dialog-centered">
@@ -116,16 +116,27 @@
                 matrizString
             },
             success: function (data) {
-                if (data.length == 1) { 
-                    console.log("Ganador: " + data[0]);
+                if (data.length == 1 || data.length==3) { 
                     hayGanador = true;
                     var endTime = performance.now()
-                    if (data[0] == 'X') {
-                        document.getElementById("resultado").value = (endTime - startTime) / 1000;
+                    if (data.length == 1) {
+                        if (data[0] == 'X') {
+                            document.getElementById("resultado").value = (endTime - startTime) / 1000;
+                        }
+                        alert("Ganador: " + data[0])
                     }
-                   
-                    alert("Ganador: " + data[0])
-                    document.getElementById("formulario").submit();
+                    else if (data.length == 3) {
+                        let row = data[0];
+                        let col = data[1];
+                        $("#" + row + col).html('O')
+                        if (data[2] == 'X') {
+                            document.getElementById("resultado").value = (endTime - startTime) / 1000;
+                        }
+                        alert("Ganador: " + data[2]);
+
+                    }
+                    setTimeout(() => { document.getElementById("formulario").submit(); }, 1000);
+                    
 
                 }
                 else {

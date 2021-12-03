@@ -78,7 +78,7 @@ class JuegoTikTakToe{
   function jugadaCompu($tablero){
     $jugadaInteligente=$this->jugadaCompuInteligente($tablero);
     if($jugadaInteligente==""){
-    $this->tableroToString($tablero);
+    // $this->tableroToString($tablero);
       $posiblesCeldas=$this->getEspaciosVacios($tablero);
       $key=array_rand($posiblesCeldas);
       $xCoordinate= $posiblesCeldas[$key][0];
@@ -112,6 +112,13 @@ class JuegoTikTakToe{
     $ganador = $this->checkWinningConditions($tablero);
     if($ganador=="nadie") {
         $coordenadasJugadaCompu=$this->jugadaCompu($tablero);
+        $row=$coordenadasJugadaCompu[0];
+        $col=$coordenadasJugadaCompu[1];
+        $tablero[$row][$col]='O';
+        $ganador = $this->checkWinningConditions($tablero);
+        if($ganador=='O'){
+          $coordenadasJugadaCompu=$coordenadasJugadaCompu.$ganador;
+        }
     }
     else {
         $coordenadasJugadaCompu=$ganador;
@@ -136,7 +143,7 @@ function getDiagonal1($tablero) {
 }
 
 function getDiagonal2($tablero) {
-  return($tablero[2][2].$tablero[1][1].$tablero[0][0]);
+  return($tablero[0][2].$tablero[1][1].$tablero[2][0]);
 }
 
 function checkWinningConditions($tablero) {

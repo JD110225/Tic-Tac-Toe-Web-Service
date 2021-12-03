@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
-using Tarea3.Models;
+//using Tarea3.Models;
 namespace Tarea3
 {
     public class MvcApplication : System.Web.HttpApplication
@@ -22,7 +22,7 @@ namespace Tarea3
         {
             Session["test"] = new ServiceReference2.TikTakToePortClient();
 
-            Session["myList"] = new x();
+            //Session["myList"] = new x();
         }
     }
 }
